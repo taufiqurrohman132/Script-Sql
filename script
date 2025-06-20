@@ -1,0 +1,83 @@
+// create table
+CREATE TABLE Cabang (
+  Kd_cabang VARCHAR(5) PRIMARY KEY,
+  Nama VARCHAR(50),
+  Alamat VARCHAR(50),
+  Jml_Nasabah INT
+);
+
+CREATE TABLE Nasabah (
+  Kd_Nasabah VARCHAR(5) PRIMARY KEY,
+  Nama VARCHAR(50),
+  Alamat VARCHAR(50),
+  Rekening VARCHAR(20),
+  Kd_cabang VARCHAR(5),
+  Saldo INT,
+  FOREIGN KEY (Kd_cabang) REFERENCES Cabang(Kd_cabang)
+);
+
+-- Data Cabang
+INSERT INTO Cabang VALUES 
+('KC001', 'KC AKAKOM', 'JANTI', 8),
+('KC002', 'KC GEJAYAN', 'GEJAYAN', 5),
+('KC003', 'KC WIROBRAJAN', 'WIROBRAJAN', 8),
+('KC004', 'KC GEDUNG KUNING', 'GEDUNG KUNING', 7),
+('KC005', 'KC BABARSARI', 'BABARSARI', 3);
+
+-- Data Nasabah
+INSERT INTO Nasabah VALUES
+('N0001', 'Januar', 'Condong Catur', '12340001', 'KC002', 1500000),
+('N0002', 'Febri', 'Gejayan', '12340002', 'KC004', 2500000),
+('N0003', 'Marina', 'Gamping', '12340003', 'KC005', 1400000),
+('N0004', 'Aprilia', 'Janti', '12340004', 'KC001', 7000000),
+('N0005', 'Memey', 'Kotabaru', '12340005', 'KC003', 2000000),
+('N0006', 'Junita', 'Kalasan', '12340006', 'KC001', 1200000),
+('N0007', 'Juliana', 'Terban', '12340007', 'KC002', 1300000),
+('N0008', 'Agusto', 'Sleman', '12340008', 'KC005', 2800000),
+('N0009', 'Septiana', 'Terban', '12340009', 'KC004', 9000000),
+('N0010', 'Oktavia', 'Sagan', '12340010', 'KC003', 4500000),
+('N0011', 'Novia', 'Monjali', '12340011', 'KC001', 750000),
+('N0012', 'Desia', 'Timoho', '12340012', 'KC005', 1200000);
+
+
+SELECT Nama, Alamat, Saldo FROM Nasabah;
+
+SELECT Nama FROM Nasabah WHERE Saldo > 2000000;
+
+SELECT Nama FROM Nasabah WHERE Alamat = 'Gejayan';
+
+SELECT Nama FROM Nasabah WHERE Kd_cabang = 'KC003';
+
+SELECT Nama, Alamat FROM Cabang;
+
+SELECT Nama FROM Cabang WHERE Alamat = 'JANTI';
+
+SELECT Nama FROM Cabang WHERE Jml_Nasabah > 5;
+
+UPDATE Cabang
+SET Nama = 'KC Ambarukmo', Alamat = 'Ambarukmo', Jml_Nasabah = 15
+WHERE Kd_cabang = 'KC002';
+
+DELETE FROM Cabang WHERE Jml_Nasabah < 5;
+
+UPDATE Nasabah
+SET Alamat = 'Monjali', Saldo = 9000000
+WHERE Kd_Nasabah = 'N0010';
+
+DELETE FROM Nasabah WHERE Alamat = 'Terban';
+
+Menampilkan saldo maksimal.
+SELECT MAX(Saldo) AS Saldo_Maksimal FROM Nasabah;
+
+m) Menampilkan rata-rata saldo nasabah.
+SELECT AVG(Saldo) AS RataRata_Saldo FROM Nasabah;
+
+n) Menampilkan jumlah nasabah.
+SELECT COUNT(*) AS Jumlah_Nasabah FROM Nasabah;
+
+
+
+
+
+
+
